@@ -1,5 +1,3 @@
-# See: http://code.google.com/p/arduino/wiki/Platforms
-
 ##############################################################
 
 uno.name=Arduino Uno
@@ -146,21 +144,39 @@ mega.build.variant=mega
 
 ##############################################################
 
-#leonardo.name=Arduino Leonardo
-#leonardo.upload.protocol=arduino
-#leonardo.upload.maximum_size=28672
-#leonardo.upload.speed=1200
-#leonardo.bootloader.low_fuses=0xde
-#leonardo.bootloader.high_fuses=0xd8
-#leonardo.bootloader.extended_fuses=0xcb
-#leonardo.bootloader.path=diskloader
-#leonardo.bootloader.file=DiskLoader-Leonardo.hex
-#leonardo.bootloader.unlock_bits=0x3F
-#leonardo.bootloader.lock_bits=0x2F
-#leonardo.build.mcu=atmega32u4
-#leonardo.build.f_cpu=16000000L
-#leonardo.build.core=arduino
-#leonardo.build.variant=leonardo
+leonardo.name=Arduino Leonardo
+leonardo.upload.protocol=arduino
+leonardo.upload.maximum_size=28672
+leonardo.upload.speed=1200
+leonardo.bootloader.low_fuses=0xde
+leonardo.bootloader.high_fuses=0xd8
+leonardo.bootloader.extended_fuses=0xcb
+leonardo.bootloader.path=diskloader
+leonardo.bootloader.file=DiskLoader-Leonardo.hex
+leonardo.bootloader.unlock_bits=0x3F
+leonardo.bootloader.lock_bits=0x2F
+leonardo.build.mcu=atmega32u4
+leonardo.build.f_cpu=16000000L
+leonardo.build.core=arduino
+leonardo.build.variant=leonardo
+
+##############################################################
+
+heatit.name=HeatIt
+heatit.upload.protocol=arduino
+heatit.upload.maximum_size=28672
+heatit.upload.speed=1200
+heatit.bootloader.low_fuses=0xde
+heatit.bootloader.high_fuses=0xd8
+heatit.bootloader.extended_fuses=0xcb
+heatit.bootloader.path=diskloader
+heatit.bootloader.file=DiskLoader-Leonardo.hex
+heatit.bootloader.unlock_bits=0x3F
+heatit.bootloader.lock_bits=0x2F
+heatit.build.mcu=atmega32u4
+heatit.build.f_cpu=16000000L
+heatit.build.core=heatit
+heatit.build.variant=leonardo
 
 ##############################################################
 
