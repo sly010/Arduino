@@ -50,25 +50,15 @@ const static uint8_t MOSI = 7;
 const static uint8_t MISO = 8;
 const static uint8_t SCK  = 9;
 
-
-const static uint8_t A4 = 10;
-const static uint8_t A5 = 11;
-const static uint8_t A6 = 12;
-const static uint8_t A7 = 13;
-const static uint8_t A8 = 14;
-const static uint8_t A9 = 15;
-const static uint8_t A10 = 16;
-const static uint8_t A11 = 17;
-
 // heat pins to digital IO
-const static uint8_t H0 = A4;
-const static uint8_t H1 = A5;
-const static uint8_t H2 = A6;
-const static uint8_t H3 = A7;
-const static uint8_t H4 = A8;
-const static uint8_t H5 = A9;
-const static uint8_t H6 = A10;
-const static uint8_t H7 = A11;
+const static uint8_t H0 = 10;
+const static uint8_t H1 = 11;
+const static uint8_t H2 = 12;
+const static uint8_t H3 = 13;
+const static uint8_t H4 = 14;
+const static uint8_t H5 = 15;
+const static uint8_t H6 = 16;
+const static uint8_t H7 = 17;
 
 //	__AVR_ATmega32U4__ has an unusual mapping of pins to channels
 extern const uint8_t PROGMEM analog_pin_to_channel_PGM[];
@@ -84,6 +74,7 @@ extern const uint8_t PROGMEM analog_pin_to_channel_PGM[];
 
 // D0        PD3                 TXD1/INT3
 // D1        PD2                 RXD1/INT2
+
 // D2  A0    PF5  ADC5           TCK  
 // D3  A1    PF4  ADC4           TMS
 // D4  A2    PF1  ADC1
@@ -94,23 +85,23 @@ extern const uint8_t PROGMEM analog_pin_to_channel_PGM[];
 // D8        PB2	    MOSI     PCINT2/PDI
 // D9        PB0	    SS       PCINT0
 
-// D10  A4   xxx        H0       
-// D11  A5   xxx        H1
-// D12  A6   xxx        H2
-// D13  A7   xxx        H3
-// D14  A8   xxx        H4
-// D15  A9   xxx        H5
-// D16  A10  xxx        H6
-// D17  A11  xxx        H7
+// D10  H0   PB7                 OC0A/OC1C/PCINT7/#RTS
+// D11  H1   PE6                 INT.6/AIN0
+// D12  H2   PD0                 OC0B/SCL/INT0
+// D13  H3   PD1                 SDA/INT1
+// D14  H4   PD5                 XCK1/#CTS
+// D15  H5   PC6                 OC3A/#OC4A
+// D16  H6   PE2                 #HWB
+// D17  H7   PC7                 OC4A/CLK0/ICP3
 
-// PWM0      PB7        OC0A,OC1C   PCINT7/#RTS
-// PWM1      PE6                    INT.6/AIN0
-// PWM2      PD0        OC0B,       SCL/INT0
-// PWM3      PD1        xxxx        SDA/INT1
-// PWM4      PD5        xxxx        XCK1/#CTS
-// PWM5      PC6        OC3A,#OC4A
-// PWM6      PE2                    #HWB
-// PWM7      PC7        OC4A        CLK0/ICP3
+// A4        ADC9
+// A5        ADC8
+// A6        ADC10
+// A7        ADC11
+// A8        ADC12
+// A9        ADC13
+// A10       ADC6
+// A11       ADC7
 
 // these arrays map port names (e.g. port B) to the
 // appropriate addresses for various functions (e.g. reading
@@ -145,78 +136,52 @@ const uint16_t PROGMEM port_to_input_PGM[] = {
 	(uint16_t) &PINF,
 };
 
-const uint8_t PROGMEM digital_pin_to_port_PGM[30] = {
-	PD, // D0 - PD2
-	PD,	// D1 - PD3
-	PD, // D2 - PD1
-	PD,	// D3 - PD0
-	PD,	// D4 - PD4
-	PC, // D5 - PC6
-	PD, // D6 - PD7
-	PE, // D7 - PE6
+const uint8_t PROGMEM digital_pin_to_port_PGM[18] = {
+	PD, // D0 - PD3
+	PD, // D1 - PD2
 	
-	PB, // D8 - PB4
-	PB,	// D9 - PB5
-	PB, // D10 - PB6
-	PB,	// D11 - PB7
-	PD, // D12 - PD6
-	PC, // D13 - PC7
-	
-	PB,	// D14 - MISO - PB3
-	PB,	// D15 - SCK - PB1
-	PB,	// D16 - MOSI - PB2
-	PB,	// D17 - SS - PB0
-	
-	PF,	// D18 - A0 - PF7
-	PF, // D19 - A1 - PF6
-	PF, // D20 - A2 - PF5
-	PF, // D21 - A3 - PF4
-	PF, // D22 - A4 - PF1
-	PF, // D23 - A5 - PF0
-	
-	PD, // D24 / D4 - A6 - PD4
-	PD, // D25 / D6 - A7 - PD7
-	PB, // D26 / D8 - A8 - PB4
-	PB, // D27 / D9 - A9 - PB5
-	PB, // D28 / D10 - A10 - PB6
-	PD, // D29 / D12 - A11 - PD6
+	PF, // D2 - PF5 - A0
+	PF, // D3 - PF4 - A1
+	PF, // D4 - PF1 - A2
+	PF, // D5 - PF0 - A3
+
+	PB, // D6 - PB3 - MISO
+	PB, // D7 - PB1 - SCK
+	PB, // D8 - PB2 - MOSI
+	PB, // D9 - PB0 - SS
+
+	PB, // D10 - PB7
+	PE, // D11 - PE6
+	PD, // D12 - PD0
+	PD, // D13 - PD1
+	PD, // D14 - PD5
+	PC, // D15 - PC6
+	PE, // D16 - PE2
+	PC, // D17 - PC7
 };
 
-const uint8_t PROGMEM digital_pin_to_bit_mask_PGM[30] = {
-	_BV(2), // D0 - PD2
-	_BV(3),	// D1 - PD3
-	_BV(1), // D2 - PD1
-	_BV(0),	// D3 - PD0
-	_BV(4),	// D4 - PD4
-	_BV(6), // D5 - PC6
-	_BV(7), // D6 - PD7
-	_BV(6), // D7 - PE6
+const uint8_t PROGMEM digital_pin_to_bit_mask_PGM[18] = {
+	_BV(3), // D0 - PD3
+	_BV(2), // D1 - PD2
 	
-	_BV(4), // D8 - PB4
-	_BV(5),	// D9 - PB5
-	_BV(6), // D10 - PB6
-	_BV(7),	// D11 - PB7
-	_BV(6), // D12 - PD6
-	_BV(7), // D13 - PC7
-	
-	_BV(3),	// D14 - MISO - PB3
-	_BV(1),	// D15 - SCK - PB1
-	_BV(2),	// D16 - MOSI - PB2
-	_BV(0),	// D17 - SS - PB0
-	
-	_BV(7),	// D18 - A0 - PF7
-	_BV(6), // D19 - A1 - PF6
-	_BV(5), // D20 - A2 - PF5
-	_BV(4), // D21 - A3 - PF4
-	_BV(1), // D22 - A4 - PF1
-	_BV(0), // D23 - A5 - PF0
-	
-	_BV(4), // D24 / D4 - A6 - PD4
-	_BV(7), // D25 / D6 - A7 - PD7
-	_BV(4), // D26 / D8 - A8 - PB4
-	_BV(5), // D27 / D9 - A9 - PB5
-	_BV(6), // D28 / D10 - A10 - PB6
-	_BV(6), // D29 / D12 - A11 - PD6
+	_BV(5), // D2 - PF5 - A0
+	_BV(4), // D3 - PF4 - A1
+	_BV(1), // D4 - PF1 - A2
+	_BV(0), // D5 - PF0 - A3
+
+	_BV(3), // D6 - PB3 - MISO
+	_BV(1), // D7 - PB1 - SCK
+	_BV(2), // D8 - PB2 - MOSI
+	_BV(0), // D9 - PB0 - SS
+
+	_BV(7), // D18 - PB7
+	_BV(6), // D19 - PE6
+	_BV(0), // D20 - PD0
+	_BV(1), // D21 - PD1
+	_BV(5), // D22 - PD5
+	_BV(6), // D23 - PC6
+	_BV(2), // D24 - PE2
+	_BV(7), // D25 - PC7
 };
 
 const uint8_t PROGMEM digital_pin_to_timer_PGM[18] = {
@@ -242,20 +207,20 @@ const uint8_t PROGMEM digital_pin_to_timer_PGM[18] = {
 };
 
 const uint8_t PROGMEM analog_pin_to_channel_PGM[4] = {
-	7,	// A0				PF0					ADC0
-	6,	// A1				PF1					ADC1
-	5,	// A2				PF4					ADC4
-	4,	// A3				PF5					ADC5
+	5,	// A0				PF5					ADC5
+	4,	// A1				PF4					ADC4
+	1,	// A2				PF1					ADC1
+	0,	// A3				PF0					ADC0
 
 	// the followings are heat pins
-	7,	// A4				PF0					ADC0
-	6,	// A5				PF1					ADC1
-	5,	// A6				PF4					ADC4
-	4,	// A7				PF5					ADC5
-	7,	// A8				PF0					ADC0
-	6,	// A9				PF1					ADC1
-	5,	// A10				PF4					ADC4
-	4,	// A11				PF5					ADC5
+	9,	// A4									ADC9
+	8,	// A5									ADC8
+	10,	// A6									ADC10
+	11,	// A7									ADC11
+	12,	// A8									ADC12
+	13,	// A9									ADC13
+	6,	// A10									ADC6
+	7,	// A11									ADC7
 
 };
 

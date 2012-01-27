@@ -176,7 +176,7 @@ heatit.bootloader.lock_bits=0x2F
 heatit.build.mcu=atmega32u4
 heatit.build.f_cpu=16000000L
 heatit.build.core=heatit
-heatit.build.variant=leonardo
+heatit.build.variant=heatit
 
 ##############################################################
 
